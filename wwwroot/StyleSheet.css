@@ -1,0 +1,134 @@
+﻿body {
+    background-color: #D5D6D8;
+    font-family: 'Times New Roman', Times, serif;
+    color: #29465b;
+}
+
+h1 {
+    border-style: solid;
+    border-width: 8px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    padding: 5px;
+    width: 550px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    fill:grey;
+}
+
+#h1 {
+    border-style: solid;
+    border-width: 8px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    padding: 5px;
+    width: 295px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    fill: grey;
+}
+
+#h2 {
+    border-style: solid;
+    border-width: 8px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    padding: 5px;
+    width: 410px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    fill: grey;
+}
+
+#h3 {
+    border-style: solid;
+    border-width: 8px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    padding: 5px;
+    width: 440px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    fill: grey;
+}
+
+#h4 {
+    border-style: solid;
+    border-width: 8px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    padding: 5px;
+    width: 590px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    fill: grey;
+}
+
+#indexImage1 {
+    border-style: solid;
+    border-width: 6px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    width: 400px;
+    height: 450px;
+    position: absolute;
+    top: 200px;
+    left:90px;
+}
+
+#indexImage2 {
+    border-style: solid;
+    border-width: 6px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    width: 400px;
+    height: 450px;
+    position: absolute;
+    top: 200px;
+    left: 560px;
+}
+
+#indexImage3 {
+    border-style: solid;
+    border-width: 6px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    width: 400px;
+    height: 450px;
+    position: absolute;
+    top: 200px;
+    left: 1040px;
+}
+
+#indexIntro1 {
+    border-style: solid;
+    border-width: 6px;
+    border-radius: 10px;
+    border-color: #2B4F61;
+    margin-top: 570px;
+    width:600px;
+    padding: 3px;
+}
+
+#loginRegister {
+    border-style: solid;
+    width: 600px;
+    float: left;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+#loginEmployee {
+    border-style: solid;
+    width: 600px;
+    float: right;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding:3px;
+}
