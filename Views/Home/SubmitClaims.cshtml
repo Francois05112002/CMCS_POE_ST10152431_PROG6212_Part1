@@ -5,5 +5,58 @@
 
 <body>
     <link rel="stylesheet" href="~/StyleSheet.css" />
+
     <h1 id="h2">Time To Submit Claims</h1>
+
+    <div id="submitClaimsInfo">
+        <h2 style="text-align:center">Before You Claim...</h2>
+        <p>put all information here</p>
+    </div>
+
+    <div id="submitClaims">
+        <h2 style="text-align:center">Start Claiming !</h2>
+        <p style="text-align:center; font-size:12px; margin-bottom:20px">
+            Make sure to fill in all feilds and press 'Enter' to submit your first claim. You can submit as amy claims as you like.
+        </p>
+        <form>
+            <div style="padding:5px">
+
+
+                <div style="margin-bottom:15px" >
+                    <p>Select the level at which you lectured</p>
+                    <label>Higher Certificate</label>
+                    <input id="levelLectured" type="radio" name="levelLectured">
+                    <label>Bachelors</label>
+                    <input id="levelLectured" type="radio" name="levelLectured">
+                    <label>Postgraduate</label>
+                    <input id="levelLectured" type="radio" name="levelLectured">
+                    <label>Masters</label>
+                    <input id="levelLectured" type="radio" name="levelLectured">
+                    <label>Doctral</label>
+                    <input id="levelLectured" type="radio" name="levelLectured">
+                </div>
+
+                
+                <div style="margin-bottom:15px">
+                    <p>Specify the group & module you lectured</p>
+                    <input type="text" name="groupCode" placeholder="Group" required>
+                    <input type="text" name="moduleName" placeholder="Module Name" required>
+                    <input type="text" name="moduleCode" placeholder="Module Code" required>
+                </div>
+
+                
+                <div style="margin-bottom:15px">
+                    <p>Complete time sheet & attach any supporting/additional documents</p>
+                    <input type="number" name="hours" placeholder="Hours On Premisis" required>
+                    <input type="number" name="hoursOvertime" placeholder="Hours Overtime" required>
+                    <input type="file" name="supportingDocs" placeholder="Supporting Documents" required>
+                </div>
+
+                <div style="margin-bottom:15px">
+                    <button type="submit">ENTER</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
 </body>

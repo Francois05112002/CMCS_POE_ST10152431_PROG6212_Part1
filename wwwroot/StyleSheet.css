@@ -132,3 +132,39 @@ h1 {
     border-radius: 10px;
     padding:3px;
 }
+
+#submitClaimsInfo {
+    float: left;
+    width: 450px;
+    border-style: solid;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+#submitClaims {
+    float: right;
+    width: 750px;
+    border-style: solid;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+#verifyClaims {
+    float: left;
+    width: 750px;
+    border-style: solid;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+#verifyClaimsInfo {
+    float: right;
+    width: 450px;
+    border-style: solid;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 3px;
+}
