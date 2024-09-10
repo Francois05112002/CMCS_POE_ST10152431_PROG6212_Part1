@@ -1,7 +1,5 @@
 ﻿@page
 @model CMCS_POE_ST10152431_PROG6212_Part1.Views.Home.LogInUserModel
-@{
-}
 
 <body>
     <link rel="stylesheet" href="~/StyleSheet.css" />
@@ -16,64 +14,60 @@
     </div>
 
     <div id="loginRegister" style="margin-bottom:70px;">
-        <h2 style="text-align:center">Lets Start Slow...</h2>
-        <p style="text-align:center; font-size:12px; margin-bottom:20px">Hello and welcome, please fill in details and we will get back to you shortly</p>
-        <form>
+        <h2 style="text-align:center">Let's Start Slow...</h2>
+        <p style="text-align:center; font-size:12px; margin-bottom:20px">Hello and welcome, please fill in details...</p>
+        <form asp-controller="Account" asp-action="Register" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="actionType" value="Register" />
             <div style="padding:5px">
+                <div style="margin-bottom:15px">
+                    <p>If this is your very first time with us please attach your CV...</p>
+                    <input type="file" name="Resume" required>
+                    <input type="checkbox" name="PreviousWork">
+                </div>
 
-            <div style="margin-bottom:15px">
-                <p>If this is your very first time with us please attach your CV...if you have worked here before tik the box</p>
-                <input type="file" name="Resume" placeholder="Curriculum Vitae" required>
-                <input type="checkbox" name="PreviousWork">
-            </div>
+                <div style="margin-bottom:15px">
+                    <p>Very important information</p>
+                    <input type="text" name="Name" placeholder="Name">
+                    <input type="text" name="Surname" placeholder="Surname" required>
+                    <input type="number" name="Age" placeholder="Age">
+                    <input type="email" name="Email" placeholder="E-mail" required>
+                    <input type="tel" name="Cellphone" placeholder="Cell-Phone">
+                    <input type="text" name="IDNumber" placeholder="ID Number" required>
+                    <input type="password" name="Password" placeholder="Password" required>
+                </div>
 
-            <div style="margin-bottom:15px">
-                <p>Very important information</p>
-                <input type="text" name="Name" placeholder="Name">
-                <input type="text" name="Surname" placeholder="Surname" required>
-                <input type="number" name="Age" placeholder="Age">
-                <input type="email" name="Email" placeholder="E-mail" required>
-                <input type="tel" name="Cellphone" placeholder="Cell-Phone">
-                <input type="text" name="IDNumber" placeholder="ID Number" required>
-                <input type="password" name="Password" placeholder="Password" required>
-            </div>
+                <div style="margin-bottom:15px">
+                    <p>Enter the date on which you are planning to start work</p>
+                    <input type="date" name="StartDate">
+                    <label>Full Time</label>
+                    <input type="radio" name="EmploymentType" value="Full Time">
+                    <label>Hybrid</label>
+                    <input type="radio" name="EmploymentType" value="Hybrid">
+                    <label>Remote</label>
+                    <input type="radio" name="EmploymentType" value="Remote">
+                </div>
 
-            <div style="margin-bottom:15px">
-                <p>Enter the date on which you are planning to start work</p>
-                <input type="date" name="StartDate">
-                <label>Full Time</label>
-                <input id="department" type="radio" name="department">
-                <label>Hybrid</label>
-                <input id="department" type="radio" name="department">
-                <label>Remote</label>
-                <input id="department" type="radio" name="department">
-            </div>
-
-            <div style="margin-bottom:15px">
-                <button type="submit">SUBMIT</button>
-            </div>
-
+                <div style="margin-bottom:15px; margin-left: 42%" >
+                    <button type="submit">SUBMIT</button>
+                </div>
             </div>
         </form>
     </div>
 
     <div id="loginEmployee">
         <h2 style="text-align:center">You Already Know !</h2>
-        <p style="text-align:center; font-size:12px; margin-bottom:20px">If you already registered an account with us just enter your surname and password to continue</p>
-        <form>
-            <div style="padding:5px">
-
-            <div style="margin-bottom:15px">
-                <input type="text" name="Surname" placeholder="Surname" required>
-                <input type="password" name="Password" placeholder="Password" required>
+        <p style="text-align:center; font-size:12px; margin-bottom:20px">If you already registered...</p>
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <input type="hidden" name="actionType" value="Login" />
+            <div>
+                <label for="Surname">Surname</label>
+                <input type="text" name="Surname" placeholder="Enter your surname" required />
             </div>
-
-            <div style="margin-bottom:15px">
-                <button type="submit">SUBMIT</button>
+            <div>
+                <label for="Password">Password</label>
+                <input type="password" name="Password" placeholder="Enter your password" required />
             </div>
-
-            </div>
+            <button type="submit" style="margin-left:46%; margin-top: 10px; margin-bottom: 15px">Login</button>
         </form>
     </div>
-
 </body>

@@ -8,6 +8,7 @@ namespace CMCS_POE_ST10152431_PROG6212_Part1.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
