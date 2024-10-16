@@ -29,10 +29,7 @@
                     <p>Very important information</p>
                     <input type="text" name="Name" placeholder="Name">
                     <input type="text" name="Surname" placeholder="Surname" required>
-                    <input type="number" name="Age" placeholder="Age">
                     <input type="email" name="Email" placeholder="E-mail" required>
-                    <input type="tel" name="Cellphone" placeholder="Cell-Phone">
-                    <input type="text" name="IDNumber" placeholder="ID Number" required>
                     <input type="password" name="Password" placeholder="Password" required>
                 </div>
 
@@ -57,7 +54,7 @@
     <div id="loginEmployee">
         <h2 style="text-align:center">You Already Know !</h2>
         <p style="text-align:center; font-size:12px; margin-bottom:20px">If you already registered...</p>
-        <form asp-controller="Account" asp-action="Register" method="post">
+        <form asp-controller="Account" asp-action="Login" method="post">
             <input type="hidden" name="actionType" value="Login" />
             <div>
                 <label for="Surname">Surname</label>
