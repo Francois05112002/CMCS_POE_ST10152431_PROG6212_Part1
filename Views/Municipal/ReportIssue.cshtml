@@ -1,0 +1,169 @@
+@model CMCS_POE_ST10152431_PROG6212_Part1.Models.ReportIssueViewModel
+@{
+    ViewData["Title"] = "Report Issue";
+}
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col-12 col-lg-7">
+            <div class="card mb-3">
+                <div class="card-header">Report Details</div>
+                <div class="card-body">
+                    <form asp-action="ReportIssue" asp-controller="Municipal" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label">Location</label>
+                            <input asp-for="Location" class="form-control" tabindex="0" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="SelectedCategory" class="form-label">Category</label>
+                            <select asp-for="SelectedCategory" class="form-select" tabindex="1">
+                                <option value="">-- Select Category --</option>
+                                @foreach (var c in Model.Categories)
+                                {
+                                    <option value="@c">@c</option>
+                                }
+                            </select>
+                            <span asp-validation-for="SelectedCategory" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Description</label>
+                            <textarea asp-for="Description" rows="6" class="form-control" tabindex="2"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Attach Media</label>
+                            <input type="file" id="fileInput" class="form-control" multiple tabindex="3" />
+                            <button type="button" id="btnAttach" class="btn btn-outline-secondary mt-2">Attach</button>
+                            <ul id="lstAttachments" class="list-group mt-2"></ul>
+                        </div>
+
+                        <div class="d-flex justify-content-between border-top pt-3">
+                            <a asp-action="MainMenu" asp-controller="Municipal" class="btn btn-outline-secondary" id="btnBack">Back to Main Menu</a>
+                            <button type="submit" class="btn btn-primary" id="btnSubmit">Submit Issue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-5">
+            <div class="card mb-3">
+                <div class="card-header">Have Your Say</div>
+                <div class="card-body">
+                    <h6 class="mb-3">Ward Pulse (this week)</h6>
+                    @if (TempData["PulseMessage"] != null)
+                    {
+                        <div class="alert alert-info">@TempData["PulseMessage"]</div>
+                    }
+
+                    <form asp-action="PulseSubmit" asp-controller="Municipal" method="post" class="mb-3">
+                        <p class="mb-2">What's your top issue today?</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pulseOption" value="Water" id="pulseWater" tabindex="10">
+                            <label class="form-check-label" for="pulseWater">Water</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pulseOption" value="Refuse" id="pulseRefuse" tabindex="11">
+                            <label class="form-check-label" for="pulseRefuse">Refuse</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pulseOption" value="Street lights" id="pulseLights" tabindex="12">
+                            <label class="form-check-label" for="pulseLights">Street lights</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pulseOption" value="Roads" id="pulseRoads" tabindex="13">
+                            <label class="form-check-label" for="pulseRoads">Roads</label>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary mt-2" id="btnPulseSubmit" tabindex="14" @(ViewBag.PulseDisabled == true ? "disabled" : "")>Submit Pulse</button>
+                    </form>
+
+                    <hr />
+
+                    <div class="d-flex align-items-center mb-2">
+                        <strong class="me-2">Civic Points:</strong>
+                        <span id="lblPoints">@Model.CurrentPoints</span>
+                    </div>
+                    <div class="progress mb-2" style="height: 8px;">
+                        <div id="prgPoints" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div id="lblEncouragement" class="text-muted small"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Attach files into a list (names only, server persistence omitted per brief)
+        const attachBtn = document.getElementById('btnAttach');
+        const fileInput = document.getElementById('fileInput');
+        const list = document.getElementById('lstAttachments');
+        let attachedNames = [];
+        attachBtn?.addEventListener('click', () => {
+            if (!fileInput.files || fileInput.files.length === 0) return;
+            for (const f of fileInput.files) {
+                attachedNames.push(f.name);
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                li.textContent = f.name;
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'btn btn-sm btn-outline-danger';
+                removeBtn.textContent = 'Remove';
+                removeBtn.addEventListener('click', () => li.remove());
+                li.appendChild(removeBtn);
+                list.appendChild(li);
+            }
+            fileInput.value = '';
+        });
+
+        // Encouragement rotation
+        const encouragementEl = document.getElementById('lblEncouragement');
+        const pointsEl = document.getElementById('lblPoints');
+        const progressEl = document.getElementById('prgPoints');
+
+        function computeBadgeInfo(points) {
+            let nextThreshold = 200; // Bronze 0–199, Silver 200–499, Gold 500+
+            let currentLabel = 'Bronze';
+            if (points >= 500) { currentLabel = 'Gold'; nextThreshold = 500; }
+            else if (points >= 200) { currentLabel = 'Silver'; nextThreshold = 500; }
+            return { currentLabel, nextThreshold };
+        }
+
+        function updateProgress() {
+            const points = parseInt(pointsEl?.textContent || '0');
+            const info = computeBadgeInfo(points);
+            let start = (info.currentLabel === 'Bronze') ? 0 : (info.currentLabel === 'Silver' ? 200 : 500);
+            let span = (info.currentLabel === 'Gold') ? 1 : (info.currentLabel === 'Silver' ? 300 : 200);
+            const pct = info.currentLabel === 'Gold' ? 100 : Math.max(0, Math.min(100, Math.round(((points - start) / span) * 100)));
+            progressEl.style.width = pct + '%';
+            progressEl.setAttribute('aria-valuenow', pct.toString());
+            progressEl.textContent = info.currentLabel + ' (' + pct + '%)';
+        }
+
+        function rotateMessages() {
+            const messages = [
+                "Thanks! +5 pts for reporting.",
+                "You're in the top 10 of Ward 59!",
+                "Keep going—next badge at 200 pts.",
+                "Civic pride unlocked—nice work!"
+            ];
+            let idx = 0;
+            encouragementEl.textContent = messages[0];
+            setInterval(() => {
+                idx = (idx + 1) % messages.length;
+                encouragementEl.textContent = messages[idx];
+            }, 6000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateProgress();
+            rotateMessages();
+        });
+    </script>
+}
+

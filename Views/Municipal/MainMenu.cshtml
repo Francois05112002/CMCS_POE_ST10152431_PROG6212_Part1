@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Municipal Services";
+}
+
+<div class="container py-4">
+    <h1 class="display-5 mb-4">Municipal Services</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    <div class="row g-3">
+        <div class="col-12 col-md-4">
+            <a class="card h-100 text-decoration-none" asp-controller="Municipal" asp-action="ReportIssue">
+                <div class="card-body">
+                    <h5 class="card-title">Report Issues</h5>
+                    <p class="card-text">Log a municipal issue with location, category, and details.</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card h-100" data-bs-toggle="tooltip" data-bs-title="Coming soon">
+                <div class="card-body text-muted">
+                    <h5 class="card-title">Local Events &amp; Announcements</h5>
+                    <p class="card-text">Discover what's happening in your community.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card h-100" data-bs-toggle="tooltip" data-bs-title="Coming soon">
+                <div class="card-body text-muted">
+                    <h5 class="card-title">Service Request Status</h5>
+                    <p class="card-text">Track progress on your submitted requests.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+}
+
